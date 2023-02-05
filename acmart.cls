@@ -1,44 +1,7 @@
-%%
-%% This is file `acmart.cls',
-%% generated with the docstrip utility.
-%%
-%% The original source files were:
-%%
-%% acmart.dtx  (with options: `class')
-%% 
-%% IMPORTANT NOTICE:
-%% 
-%% For the copyright see the source file.
-%% 
-%% Any modified versions of this file must be renamed
-%% with new filenames distinct from acmart.cls.
-%% 
-%% For distribution of the original source see the terms
-%% for copying and modification in the file acmart.dtx.
-%% 
-%% This generated file may be distributed as long as the
-%% original source files, as listed above, are part of the
-%% same distribution. (The sources need not necessarily be
-%% in the same archive or directory.)
-%% \CharacterTable
-%%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
-%%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
-%%   Digits        \0\1\2\3\4\5\6\7\8\9
-%%   Exclamation   \!     Double quote  \"     Hash (number) \#
-%%   Dollar        \$     Percent       \%     Ampersand     \&
-%%   Acute accent  \'     Left paren    \(     Right paren   \)
-%%   Asterisk      \*     Plus          \+     Comma         \,
-%%   Minus         \-     Point         \.     Solidus       \/
-%%   Colon         \:     Semicolon     \;     Less than     \<
-%%   Equals        \=     Greater than  \>     Question mark \?
-%%   Commercial at \@     Left bracket  \[     Backslash     \\
-%%   Right bracket \]     Circumflex    \^     Underscore    \_
-%%   Grave accent  \`     Left brace    \{     Vertical bar  \|
-%%   Right brace   \}     Tilde         \~}
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{acmart}
-[2022/10/24 v1.88 Typesetting articles for the Association for Computing Machinery]
+
 \def\@classname{acmart}
 \InputIfFileExists{acmart-preload-hook.tex}{%
   \ClassWarning{\@classname}{%
@@ -2825,7 +2788,7 @@
       \string\titlenote{} or \string\authornote{} instead!}}%
   \def\@article@string{\ifx\@acmArticle\@empty{\ }\else,
     Article~\@acmArticle\ \fi}%
-  \par\medskip\small\noindent{\bfseries ACM Reference Format:}\par\nobreak
+  \par\medskip\small\noindent{\bfseries }\par\nobreak
   \noindent\bgroup
     \def\\{\unskip{}, \ignorespaces}\authors\egroup. \@acmYear. \@title
   \ifx\@subtitle\@empty. \else: \@subtitle. \fi
@@ -2834,18 +2797,18 @@
     % and the present \@mkbibcitation definition is never used
     % in this case. The conditional remains useful if the user
     % explicitly sets \settopmatter{printacmref=true}.
-    \if@ACM@journal@bibstrip
-       \textit{\@journalNameShort}
-       \@acmVolume, \@acmNumber \@article@string (\@acmPubDate),
-       \ref{TotPages}~\@pages@word.
-    \else
-       In \textit{\@acmBooktitle}%
-       \ifx\@acmEditors\@empty\textit{.}\else
-         \andify\@acmEditors\textit{, }\@acmEditors~\@editorsAbbrev.%
-       \fi\
-       ACM, New York, NY, USA%
-         \@article@string\unskip, \ref{TotPages}~\@pages@word.
-    \fi
+    % \if@ACM@journal@bibstrip
+    %    \textit{\@journalNameShort}
+    %    \@acmVolume, \@acmNumber \@article@string (\@acmPubDate),
+    %    \ref{TotPages}~\@pages@word.
+    % \else
+    %    In \textit{\@acmBooktitle}%
+    %    \ifx\@acmEditors\@empty\textit{.}\else
+    %      \andify\@acmEditors\textit{, }\@acmEditors~\@editorsAbbrev.%
+    %    \fi\
+     
+    %      \@article@string\unskip, \ref{TotPages}~\@pages@word.
+    % \fi
   \fi
   \ifx\@acmDOI\@empty\else\@formatdoi{\@acmDOI}\fi
 \par\egroup}
