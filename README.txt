@@ -1,7 +1,5 @@
 # Report for Reproduction Package for "JSONSchemaDiscovery"
 This project provides the reproduction package for the JSONSchemaDiscovery.It is intended to discover the Schema behind the existing JSON data file.
-The package is accessible in the following link:
-https://github.com/ilnazTayebi/JSONSchemaDiscoveryReproduction.git
 
 ## Building the Docker image
 - Clone the repository
