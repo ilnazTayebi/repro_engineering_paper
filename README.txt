@@ -1,336 +1,71 @@
-This package provides a class for typesetting publications of the
-Association for Computing Machinery.
+# Report for Reproduction Package for "JSONSchemaDiscovery"
+This project provides the reproduction package for the JSONSchemaDiscovery.It is intended to discover the Schema behind the existing JSON data file.
+The package is accessible in the following link:
+https://github.com/ilnazTayebi/JSONSchemaDiscoveryReproduction.git
 
-Your TeX distribution probably includes the latest released version of
-this package.  If you decide to install it yourself, please see the
-Installation section of the User's Guide.
+## Building the Docker image
+- Clone the repository
+  > git clone https://github.com/ilnazTayebi/JSONSchemaDiscoveryReproduction.git
 
-Please note that the version on Github is a development (or
-experimental) version: please download it for testing new features.
-The production version is the one on CTAN and ACM sites.
+-  Since the dataset is huge we could not upload all three bson data files to the git repository. Currently the venues.bson file is uploaded in the Github repository. You can test the application only via this data file. If users intended to run applications with all datasets, then they can Download the Foursquare dataset. otherwise, skip the download file step. and go to build the docker file step.
+# Download Foursquare dataset
+  -In the folder named combined all json and bson files can be found.Put the bson files into the project's dataset folder.   
+    > https://www.dropbox.com/sh/j0bxw52b6fj46pm/AACOu60zgbNG1nKhnseYZ8uHa?dl=0  
 
+# Build the Docker image from scratch
+  
+  > cd JSONSchemaDiscoveryReproduction
+         
+  - Since the dataset is huge and it takes alot of time to import all the data, users enable to Build and Run the docker-compose and pass the suitable variable based on   the need to import all three JSON data files or only one specific one. The collectionName name can be "venues" or "checkins" or "tweets" or "doall". In order to import all JSON data files choose the "doall"
+    > $env:collectionName=<"Collectionname">;docker-compose up
+    
+      - Import venues JASON file
 
-Changes
+      >$  $env:collectionName="venues";docker-compose up
 
-Version 1.88   New ISSNs
-	       Documentation updates
-	       New journal:  PACMNET
+      - Import venues JASON file
 
-Version 1.87   CC license is allowed for non-acm documents and ACM Engage
-	       documents only
-	       New format acmcp for the cover page
-	       New journals: JATS, ACMJCSS, TORS
-	       Bug fixes
+      >$  $env:collectionName="checkins";docker-compose up
+      
+      - Import venues JASON file
 
-Version 1.86.  Empty country in affiliation now produces an error
-               Bug fixes
-	       New samples for acmengage
+      >$  $env:collectionName="tweets";docker-compose up
 
-Version 1.85.  Bug fixes
-	       Added support for Creative Commons licenses (requires
-	       doclicense images)
-	       New journals
-	       New format acmengage for ACM Engage CSEdu course materials 
+      - Import all three JASON files
 
-Version 1.84   Support for BibLaTeX rewritten (thanks to
-	       Roberto Di Cosmo and Kartik Singhal)
-	       Corrected German translation (thanks to Dirk Beyer)
-	       New journals
+      >$  $env:collectionName="doall";docker-compose up
 
-Version 1.83   Support for multilanguage papers
-	       ISSN changes for some journals
+  - Now, we can get an interactive shell of the running docker service:
 
-Version 1.82   Bug fixes.
-	       New command \anon for anonymization of short strings.
-	       Documentation update.
+   >$ docker exec -it api  bash
+  
+  - The measurement is based on the FOURSQUARE dataset, which is produced by ÇELIKTEN, E.; FALHER, G. L.; MATHIOUDAKIS, M. Modeling urban behavior mining geotagged social data. IEEE Transactions on Big Data, v. 3, n. 2, p. 220–233,June 2017. Use the following step to evaluate the average processing time spent in the schema extraction process for FOURSQUARE the datasets :
+      
+      - For generate the result based on  all tree Jason data files:
+      
+       >$ doallsteps.sh
 
-Version 1.81   Bug fixes
-	       New bib field distinctURL to print URL even if doi is present.
-	       Reworded samples
+        - For generate the result based on the Venuess:
 
-Version 1.80   New journals: DLT, FAC
+        >$ dovenuesschema.sh
 
-Version 1.79   Fixed pages with index
-	       (https://github.com/borisveytsman/acmart/issues/440)
-	       Updated information for TAP, TCPS, TEAC
+        - For generate the result based on the checkins:
 
-Version 1.78   Documentation update.
-	       Magic texcount comments for samples.
-	       Title page now is split if there are too many authors
-	       Bug fixes.
+        >$ docheckinsschema.sh
 
-Version 1.77   Changed the way to typeset multiple affiliations (Christoph Sommer)
+        - For generate the result based on the tweets:
 
-Version 1.76   Added many journal abbreviations to the bst.
-	       New experimental option: pbalance
-	       ORCID linking code
+        >$ dotweetsschema.sh
+        
+        - Runnig doallsteps.sh takes much time to run.
 
-Version 1.75   Omitted \country now produces error.
-	       Added \AtBeginMaketitle
+  - Finally, we need to visualise the results and generate the paper.While the paper is written in LaTeX, we use python to
+  produce  the average processing time spent in the schema extraction process from the data, and integrate them into the LaTeX sources.
 
-Version 1.74   Bug fixes.  A regression introduced in the font changes
-	       is reverted.
+      >$ prepare_data.sh
 
-Version 1.73   Bug fixes
-	       The elements institution, city and country are now obligatory
-	       for affiliations.  The absence of them produces a warning
-
-Version 1.72   Bug fixes.  Better handling of metadata.
-
-Version 1.71   Bug fixes
-               Formats sigchi and sigchi-a are retired
-	       Bibliography formatting changes for @inproceedings entries
-	       having both series and volume
-	       LuaLaTeX now uses the same OTF fonts as XeLaTeX
-
-Version 1.70   Title change for ACM/IMS Transactions on Data Science
-               Bug fixes for bibliography
-
-Version 1.69   Bug fixes
-	       Compatibility with LaTeX 2020-02-02 release
-
-Version 1.68   Bug fixes
-               BST now recognizes words `Paper' or 'Article' in
-	       eid or articleno
-
-Version 1.67   Urgent bug fixes:
-	       BibTeX style bug fixed (Michael D. Adams)
-	       Sigplan special section bugfix
-
-Version 1.66   Bug fixes
-	       BibTeX change:  location is now a synonym for city (Feras Saad) 
-	       ACM reference format is now mandatory for papers over one page.
-	       CCS concepts and keywords are now mandatory for
-	       papers over two pages.
-	       Authors' addresses are mandatory for journal articles.
-
-Version 1.65   Bug fixes
-	       New journal: DGOV
-	       DTRAP and HEALTH are now using acmlarge format
-
-Version 1.64    Produce error if abstract is entered after maketitle
-		(previously abstract was silently dropped)
-		Bug fixes for line numbering
-
-Version 1.63a   Moved TQUANT to TQC
-
-Version 1.63	New journals: TQUANT, FACMP
-
-Version 1.62    Documentation update
-		New journal: TELO
-		Bug fixes
-
-Version 1.61    Bug fixes
-                New bibtex types for artifacts
-
-Version 1.60    New option: urlbreakonhyphens (thanks to Peter Kemp)
-		Smaller header size for acmsmall
-
-Version 1.59    Now a journal format can be used for conference proceedings
-		All samples are now generated from the same .dtx file
-		Bug fixes
-
-Version 1.58    Suppressed spurious warnings.
-		New journal:  HEALTH.
-		TDSCI is renamed to TDS.
-
-Version 1.57    Change of \baselinestretch now produces an error
-                Booktabs is now always loaded
-                Added option `balance' to balance last page in two-column mode
-                E-mail is no longer split in addresses
-                New samples (Stephen Spencer)
-
-Version 1.56    Bug fixes
-                Added \flushbottom to two column formats (Philip Quinn)
-                The final punctuation for the list of concepts
-                is now a period instead of a semicolon (Philip Quinn)
-                New command \Description to describe images for visually
-                impaired users.
-
-Version 1.55    Bug fixes
-                Font changes for SIGCHI table captions
-
-Version 1.54    New option: 'nonacm' (Gabriel Scherer)
-                Deleted indent for subsubsection (suggested by Ross Moore)
-                Suppressed some obscurious warning in BibTeX processing
-                Suppressed hyperrerf warnings (Paolo G. Giarrusso)
-                New code for sections to help with accessibility patches
-                (Ross Moore)
-                Submission id, if present, is printed in anon mode
-                Bug fixes
-
-Version 1.53    New journals: PACMCGIT, TIOT, TDSCI
-
-Version 1.52    Another rewording of licenses
-
-Version 1.51    Journal footers now use abbreviated journal titles.
-                Corrected the bug with acmPrice.
-                Do not show price when copyright is set to iw3c2w3 and iw3c2w3g.
-                The package now is compatible with polyglossia (Joachim Breitner).
-                Slightly reworded copyright statements.
-
-Version 1.50    Changes in iw3c2w3 and iw3c2w3g
-
-Version 1.49    New jorunal:  DTRAP
-
-Version 1.48    Bug fixes
-                Review mode now switches on folios
-                Code prettying (Michael D. Adams)
-                Bibliography changes: @MISC entries no longer have a
-                separate date
-                Sigch-a sample bibliography renamed
-                Bib code cleanup (Zack Weinberg)
-                Acmart and version info are added to pdfcreator tag
-                \citeyear no longer produces parenthetical year
-                Added initial support for Biblatex (Daniel Thomas)
-                Added support for IW3C2 conferences
-
-Version 1.47    New journal: THRI
-
-Version 1.46    Bug fixes for bibliography: label width is now calculated
-                correctly.
-                All PACM now use screen option.  This requires etoolbox.
-                Added subtitle to ACM reference format.
-                Now acmart is compatible with fontspec.
-                \thanks is now obsolete.  The addresses are automatically
-                added to the journal version; this can be overriden with
-                \authorsaddresses command.
-                Deleted the rule at the end of frontmatter for all formats.
-                Deleted new line before doi in the reference format.
-                Reintegrated theorem code into acmart.dtx (Matthew Fluet)
-
-Version 1.45    Workaround for a Libertine bug.  Thanks to LianTze Lim
-                from Overleaf
-
-Version 1.44    Bug fixes.
-                Empty DOI and ISBN suppress printing DOI or ISBN lines
-                Separated theorem code into acmthm.sty, loaded by default.
-                Article number can be set for proceedings.
-                New commands: \acmBooktile, \editor.
-                Reference citation format updated.
-
-Version 1.43    Bug fixes
-
-Version 1.42    Deleted ACM badges
-                Bug fixes
-
-Version 1.41    Rearranged bib files
-                Added new badges
-
-Version 1.40    Bibliography changes
-                Added processing of one-compoment ccsdesc nodes
-                Bug fixes.
-                Made the height a multiple of \baselineskip + \topskip
-                Added cleveref
-                We no longer print street address in SIGs
-
-Version 1.39    Added \authornotemark commmand
-
-Version 1.38    Increase default font size for SIGPLAN
-
-Version 1.37    Reduce list indentation (Matthew Fluet)
-
-Version 1.36    Bug fixes
-                Moved PACMPL to acmlarge format
-                New journal: PACMHCI
-                Added the possibility to adjust number of author
-                boxes per row in conference formats
-
-Version 1.35    Author-year bib style now uses square brackets.
-                Changed defaults for TOG sample
-                Price is suppressed for usgov and rightsretained modes.
-                Bugs fixed
-
-Version 1.34    Deleted DOI from doi numbers
-                Changed bibstrip formatting
-                The command \terms is now obsolete
-                The rulers in review mode now have continuous numbering
-
-Version 1.33    New option `timestamp' (Michael D. Adams)
-                New option `authordraft'
-                Documentation updates
-                Bug fixes
-                We now use Type 1 versions of Libertine fonts even with XeTeX.
-                New hook acmart-preload-hook.tex (wizards only!)
-                Added new options `obeypunctuation' for \affiliation command
-                Added SubmissionID
-                Added right line count ruler for two-column formats
-                Added workaround for Adobe Acrobat bugs in selection
-                Added eid field to the bibliography
-
-Version 1.32    New DOI formatting.
-                Format siggraph is now obsolete, and sigconf
-                is used instead.
-                New proceedings title: POMACS.
-
-Version 1.31    Changed default year and month to the current ones
-                (thanks to Matteo Riondato)
-                Table of contents now works
-                Marginalia now work in all formats
-                New command \additionalaffiliation
-                Documentation changes
-
-Version 1.30    Bibtex style now recognizes https:// in doi.
-                Added \frenchspacing.
-                \department now has an optional hierarchy level.
-                Switched to T1 encoding
-                Updated IMWUT and PACMPL
-
-Version 1.29    Documentation changes.  Head height increased from 12pt to 13pt.
-                Removed spurious indent at start of abstract.
-                Improved kerning in CCS description list.
-
-Version 1.28    Bug fixes: natbib=false now behaves correctly.
-
-Version 1.27    Bug fixes
-
-Version 1.26    Bug fixes
-
-Version 1.25    Updated PACMPL journal option.
-
-Version 1.24    Added IMWUT journal option.
-
-Version 1.23    Added PACM PL journal option.
-
-Version 1.22    Bibliography changes for Aptara backend; should be
-                invisible for the users.
-
-Version 1.21    Bibliography changes: added arXiv, some cleanup
-
-Version 1.20    Bug fixes, documentation updates
-
-Version 1.19    Include 'Abstract', 'Acknowledgements', and 'References'
-                in PDF bookmarks.
-
-Version 1.18    Natbib is now the default for all versions.  A unified bib
-                file is used for all styles.  Better treatment
-                of multiple affiliations.
-
-
-Version 1.17    Formatting changes for margins and lists.  Bug fixes.
-
-Version 1.16    Formatting changes for headers and footers.
-
-Version 1.15    New structured affiliation command.
-                New commands for acknowledgements.
-
-Version 1.14    Warn about undefined citation styles; move definitions
-                of acmauthoryear and acmnumeric citation styles before
-                use.
-
-Version 1.13    Formatting changes: headers, folios etc.
-                Bibliography changes.
-
-Version 1.12    Bug fixes and documentation updates.
-                Footnotes rearranged.
-                Option natbib is now mostly superfluous: the class
-                makes a guess based on the format chosen.
-
-Version 1.11    Customization of ACM theorem styles and proof
-                environment (Matthew Fluet).
-
-Version 1.10    Bug fixes
-
-Version 1.09    SIGPLAN: revert caption rules (Matthew Fluet)
-
-Version 1.08    SIGPLAN reformatting (Matthew Fluet); bug fixes
+## Login into the application
+ - After run the the docker successfully,n avigate to http://localhost:3000/. It is possible to create new account and login. In order to access the automated    experiment's data users can login into application with the following account:
+    - email: tayebi@tayebi.de
+    - password: tayebi107323
+   
