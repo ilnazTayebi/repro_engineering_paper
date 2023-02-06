@@ -46,16 +46,16 @@ This paper presents a report on the project of reproducing the Schema Extraction
 \ccsdesc{Computer systems organization~Robotics}
 \ccsdesc[100]{Networks~Network reliability}
 
-\section*{Introduction}
+\section{Introduction}
 In computer science, reproducibility engineering is a crucial aspect that ensures research results can be verified and reused by other scientists. The purpose of this report is to detail a project I completed as part of the Reproducibility Engineering course. My aim was to create a reproducible package for the project ``An Approach for Schema Extraction of JSON and Extended JSON Document Collections'' \cite{8424731}. This report describes the reproduction project details, summarizes the key results, encounters challenges in the reproduction effort, differentiates between repeat, reproduce, and replicate, and justifies why my project focuses on reproduction only.
 
 
-\section*{Project Description}
+\section{Project Description}
 The project I worked on involved creating a reproducible package for an existing project called "Json Schema Discovery." This project provides a solution for extracting a schema from a collection of JSON or Extended JSON documents stored in a MongoDB NoSQL document-oriented database. The authors of the paper tackle the challenge of managing large amounts of data without a clear data schema and present a method that aggregates the data to create a schema for each unique structure in the collection. The final outcome is a global schema in JSON Schema format, created by combining these individual schemas into a hierarchical data structure. The project was built using Angular and the results of experiments on real datasets such as DBPedia and Foursquare showed that the generated schemas were equal to or better than those from related work.
 
 The project has a GitHub repository and an accompanying article. According to the article, three experiments were conducted to assess the quality of the generated schemas by JSON Schema Discovery. These experiments were the Quality of JSON Document Mapping for JSON Schema, Processing Time Evaluation, and Comparison with Related Work. The experiments were performed on three different datasets that are not readily available. Additionally, when I attempted to reproduce the project, no license had been assigned to it.
 
-\section*{Reproduction Effort}
+\section{Reproduction Effort}
 The reproduction project involves dockerizing the existing project and automating all its steps. This project is referred to as a reproduction, rather than repetition or replication because it uses the same source code and data as the main project. Docker is used to package the project as it provides a consistent and reproducible environment for the application to run. Packaging the project in a Docker container makes it possible to distribute the application as a single unit, making deployment, scaling, and management easier. Additionally, using containers offers benefits such as improved stability and reproducibility over time by isolating the application from other applications and the host system.
 
 The first step of the project was to create a docker file for the client side of the project, followed by enabling the API to connect to MongoDB. This required the use of docker-compose, which allows running multiple services simultaneously. 
@@ -63,10 +63,17 @@ The first step of the project was to create a docker file for the client side of
 Of the three evaluations mentioned in the article, Processing Time Evaluation has the highest reproducibility. The evaluation of JSON Schema Discovery based on the "Quality of JSON document mapping for JSON Schema" does not provide sufficient detail about the 100\% accuracy comparison between the five documents. Additionally, the evaluation of the "Quality of JSON Schema Discovery based on comparison with related work" is not preferable as the source code for the related work is difficult to obtain. As a result, the artifacts for quality evaluation based on Processing Time Evaluation have the highest ability to reproduce. The main difference in our experiment for this evaluation is the difference in operating system and hardware. The original work evaluated the processing time on an Amazon EC2t2.micro instance which is not accessible in our case. The datasets used in the experiment are tracked data from tweets, check-ins, and venues from Foursquare. The results are presented in Table 1, showing the average processing time for the schema extraction process for the datasets.
 
 \begin{table}
-  \caption{RESULTS FOR FOURSQUARE DATASETS}
+  \
   \label{tab:freq}
    \include{tablefoursquare.tex}
+
+  \caption{RESULTS FOR FOURSQUARE DATASETS
+  (N-JSON: Number of JSON documents.RS:Raw schemas.
+  ROrd:Raw schemas with ordered structure.
+  TB:Time to obtain the raw schemas per minitue.TT:Total time per min.)
+  }
 \end{table}
+
 
 The JSON Schema Discovery process automation has three main steps: inserting datasets into MongoDB, providing a script to run all schema generation steps, and refining the result for presentation in the report. The insertion of datasets into MongoDB is facilitated by an extra service named mongoseed and the mongorestore command. A shell script is provided to simulate all three schema discovery steps, creating a new account and performing an authentication process to generate a valid token. Due to the large size of the JSON data files, scripts have been implemented to allow users to run the process for all or one of the files. Finally, a small python code is written to generate the final result in the report.
 
