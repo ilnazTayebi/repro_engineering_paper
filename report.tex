@@ -25,40 +25,45 @@
 
 \fancyfoot{}
 \thispagestyle{empty}
+\settopmatter{printacmref=false}
+\setcopyright{none}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\pagestyle{plain}
+
 \begin{abstract}
 This paper presents a report on the project of reproducing the Schema Extraction of JSON, an approach for extracting schemas from JSON and Extended JSON document collections.Due to the fact that the project used the same source code \cite{JSONSchemaDiscovery2013} and dataset as the original project named ``An Approach for Schema Extraction of JSON and Extended JSON Document Collections'' \cite{8424731}, it considers as a reproducible effort. The report summarizes the key results of the reproduction project, and evacuation average processing time and discusses the challenges encountered during the reproduction effort. The importance of using a docker file and GitHub repository in creating a reproducible package is also explained. The paper concludes by discussing the differences between Repeat, Reproducing, and Replicating and why the project is considered as reproduction.
  \end{abstract}
+
+% \begin{CCSXML}
+% <ccs2012>
+%  <concept>
+%   <concept_id>10010520.10010553.10010562</concept_id>
+%   <concept_desc>Computer systems organization~Embedded systems</concept_desc>
+%   <concept_significance>500</concept_significance>
+%  </concept>
+%  <concept>
+%   <concept_id>10010520.10010575.10010755</concept_id>
+%   <concept_desc>Computer systems organization~Redundancy</concept_desc>
+%   <concept_significance>300</concept_significance>
+%  </concept>
+%  <concept>
+%   <concept_id>10010520.10010553.10010554</concept_id>
+%   <concept_desc>Computer systems organization~Robotics</concept_desc>
+%   <concept_significance>100</concept_significance>
+%  </concept>
+%  <concept>
+%   <concept_id>10003033.10003083.10003095</concept_id>
+%   <concept_desc>Networks~Network reliability</concept_desc>
+%   <concept_significance>100</concept_significance>
+%  </concept>
+% </ccs2012>
+% \end{CCSXML}
+
+% \ccsdesc[500]{Computer systems organization~Embedded systems}
+% \ccsdesc[300]{Computer systems organization~Redundancy}
+% \ccsdesc{Computer systems organization~Robotics}
+% \ccsdesc[100]{Networks~Network reliability}
  \maketitle
-\begin{CCSXML}
-<ccs2012>
- <concept>
-  <concept_id>10010520.10010553.10010562</concept_id>
-  <concept_desc>Computer systems organization~Embedded systems</concept_desc>
-  <concept_significance>500</concept_significance>
- </concept>
- <concept>
-  <concept_id>10010520.10010575.10010755</concept_id>
-  <concept_desc>Computer systems organization~Redundancy</concept_desc>
-  <concept_significance>300</concept_significance>
- </concept>
- <concept>
-  <concept_id>10010520.10010553.10010554</concept_id>
-  <concept_desc>Computer systems organization~Robotics</concept_desc>
-  <concept_significance>100</concept_significance>
- </concept>
- <concept>
-  <concept_id>10003033.10003083.10003095</concept_id>
-  <concept_desc>Networks~Network reliability</concept_desc>
-  <concept_significance>100</concept_significance>
- </concept>
-</ccs2012>
-\end{CCSXML}
-
-\ccsdesc[500]{Computer systems organization~Embedded systems}
-\ccsdesc[300]{Computer systems organization~Redundancy}
-\ccsdesc{Computer systems organization~Robotics}
-\ccsdesc[100]{Networks~Network reliability}
-
 \section{Introduction}
 In computer science, reproducibility engineering is a crucial aspect that ensures research results can be verified and reused by other scientists. The purpose of this report is to detail a project I completed as part of the Reproducibility Engineering course. My aim was to create a reproducible package for the project ``An Approach for Schema Extraction of JSON and Extended JSON Document Collections'' \cite{8424731}. This report describes the reproduction project details, summarizes the key results, encounters challenges in the reproduction effort, differentiates between repeat, reproduce, and replicate, and justifies why my project focuses on reproduction only.
 
