@@ -1,7 +1,4 @@
 # Report for Reproduction Package for "JSONSchemaDiscovery"
-This project provides the reproduction package for the JSONSchemaDiscovery.It is intended to discover the Schema behind the existing JSON data file.
-
-# Reproduction Package for "JSONSchemaDiscovery"
 This project provides the reproduction package for 
 the JSONSchemaDiscovery.It is intended to discover the
 Schema behind the existing JSON data file.
