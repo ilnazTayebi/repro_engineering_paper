@@ -76,5 +76,3 @@ Schema behind the existing JSON data file.
   - email: tayebi@tayebi.de
   - password: tayebi107323
    
-
-   
